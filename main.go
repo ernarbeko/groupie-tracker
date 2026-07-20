@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	addr := envOr("ADDR", ":8080")
+	addr := resolveAddr()
 	baseURL := envOr("API_URL", "https://groupietrackers.herokuapp.com/api")
 
 	client := api.NewClient(baseURL)
@@ -50,4 +50,17 @@ func envOr(key, fallback string) string {
 		return v
 	}
 	return fallback
+}
+
+// resolveAddr picks the listen address. Most hosting platforms (Render,
+// Railway, Heroku) inject a bare port number via $PORT; ADDR lets you
+// override the full "host:port" string for local/manual setups.
+func resolveAddr() string {
+	if addr := os.Getenv("ADDR"); addr != "" {
+		return addr
+	}
+	if port := os.Getenv("PORT"); port != "" {
+		return ":" + port
+	}
+	return ":8080"
 }
