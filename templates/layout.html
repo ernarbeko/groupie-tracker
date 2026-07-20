@@ -1,0 +1,31 @@
+{{define "head"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.Title}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="logo" href="/">Groupie</a>
+    <nav>
+      <a href="/#artists">Artists</a>
+      <a href="/#search">Search</a>
+    </nav>
+  </header>
+{{end}}
+
+{{define "foot"}}
+  <footer class="site-footer">
+    <p>Groupie Tracker · data from the Groupie Trackers API</p>
+  </footer>
+  <script src="/static/js/search.js"></script>
+</body>
+</html>
+{{end}}

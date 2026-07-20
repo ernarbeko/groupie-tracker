@@ -1,0 +1,49 @@
+{{template "head" .}}
+
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="brand">Groupie Tracker</p>
+      <h1>Find the bands. Follow the tour.</h1>
+      <p class="lede">Browse artists, members, first albums, and concert stops — then search live without leaving the page.</p>
+    </div>
+    <div class="hero-glow" aria-hidden="true"></div>
+  </section>
+
+  <section class="search-panel" id="search">
+    <label class="search-label" for="search-input">Live search</label>
+    <div class="search-row">
+      <input
+        id="search-input"
+        type="search"
+        name="q"
+        placeholder="Artist, member, year, album, or city…"
+        autocomplete="off"
+        aria-describedby="search-hint"
+      >
+      <span id="search-status" class="search-status" aria-live="polite"></span>
+    </div>
+    <p id="search-hint" class="hint">Typing sends a request to the server and updates results instantly.</p>
+    <div id="search-results" class="search-results" hidden></div>
+  </section>
+
+  <section class="artists" id="artists">
+    <div class="section-head">
+      <h2>All artists</h2>
+      <p>{{len .Artists}} acts in the catalog</p>
+    </div>
+    <div class="artist-grid">
+      {{range .Artists}}
+      <a class="artist-card" href="/artist/{{.ID}}">
+        <img src="{{.Image}}" alt="{{.Name}}" loading="lazy" width="280" height="280">
+        <div class="artist-meta">
+          <h3>{{.Name}}</h3>
+          <p>Since {{.CreationDate}} · Album {{.FirstAlbum}}</p>
+        </div>
+      </a>
+      {{end}}
+    </div>
+  </section>
+</main>
+
+{{template "foot" .}}

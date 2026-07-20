@@ -1,0 +1,10 @@
+{{template "head" .}}
+
+<main class="error-page">
+  <p class="error-code">{{.Status}}</p>
+  <h1>{{.Error}}</h1>
+  <p class="lede">Something went sideways. Head back to the catalog and try again.</p>
+  <a class="button" href="/">Back to artists</a>
+</main>
+
+{{template "foot" .}}

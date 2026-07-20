@@ -1,0 +1,81 @@
+{{template "head" .}}
+
+<main class="artist-page">
+  <a class="back" href="/">← All artists</a>
+
+  <section class="artist-hero">
+    <img class="artist-portrait" src="{{.Artist.Image}}" alt="{{.Artist.Name}}" width="360" height="360">
+    <div class="artist-intro">
+      <p class="eyebrow">Artist profile</p>
+      <h1>{{.Artist.Name}}</h1>
+      <dl class="facts">
+        <div>
+          <dt>Created</dt>
+          <dd>{{.Artist.CreationDate}}</dd>
+        </div>
+        <div>
+          <dt>First album</dt>
+          <dd>{{.Artist.FirstAlbum}}</dd>
+        </div>
+        <div>
+          <dt>Members</dt>
+          <dd>{{len .Artist.Members}}</dd>
+        </div>
+        <div>
+          <dt>Stops</dt>
+          <dd>{{len .Artist.Concerts}}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Members</h2>
+    <ul class="member-list">
+      {{range .Artist.Members}}
+      <li>{{.}}</li>
+      {{else}}
+      <li>No members listed.</li>
+      {{end}}
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Concerts</h2>
+    {{if .Artist.Concerts}}
+    <div class="concert-table-wrap">
+      <table class="concert-table">
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Country</th>
+            <th>Dates</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range .Artist.Concerts}}
+          <tr>
+            <td>{{.City}}</td>
+            <td>{{.Country}}</td>
+            <td>{{join .Dates ", "}}</td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+    {{else}}
+    <p class="empty">No concert relations available for this artist.</p>
+    {{end}}
+  <section class="panel">
+    <h2>All known locations</h2>
+        <ul class="location-list">
+        {{range .Artist.AllLocations}}
+          <li>{{formatLocation .}}</li>
+            {{else}}
+            <li>No locations listed.</li>
+            {{end}}
+        </ul>
+  </section>
+</main>
+
+{{template "foot" .}}
