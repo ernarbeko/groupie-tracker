@@ -47,7 +47,6 @@ func NewClient(baseURL string) *Client {
 }
 
 // Refresh loads artists, relations, locations, and dates from the remote API.
-// Refresh loads artists, relations, locations, and dates from the remote API.
 // All four endpoints are fetched concurrently to cut total latency roughly
 // fourfold compared to sequential requests.
 func (c *Client) Refresh() error {
@@ -128,6 +127,16 @@ func (c *Client) Refresh() error {
 	c.loadedAt = time.Now()
 	c.mu.Unlock()
 	return nil
+}
+
+func (c *Client) ensureLoaded() error {
+	c.mu.RLock()
+	fresh := len(c.artists) > 0 && time.Since(c.loadedAt) < c.ttl
+	c.mu.RUnlock()
+	if fresh {
+		return nil
+	}
+	return c.Refresh()
 }
 
 // Artists returns all artists, refreshing the cache when needed.
