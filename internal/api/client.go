@@ -47,7 +47,7 @@ func NewClient(baseURL string) *Client {
 }
 
 // Refresh loads artists, relations, locations, and dates from the remote API.
-f// Refresh loads artists, relations, locations, and dates from the remote API.
+// Refresh loads artists, relations, locations, and dates from the remote API.
 // All four endpoints are fetched concurrently to cut total latency roughly
 // fourfold compared to sequential requests.
 func (c *Client) Refresh() error {
